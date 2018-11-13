@@ -15,6 +15,7 @@
     <link href="<?php echo base_url()?>assets/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url()?>assets/dist/css/style.min.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -70,8 +71,8 @@
                                         <img src="<?php echo base_url()?>assets/img/dummy/u1.png" alt="user" class="img-circle" width="60">
                                     </div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0">admin</h4>
-                                        <p class=" m-b-0">admin@gmail.com</p>
+                                        <h4 class="m-b-0"><?php echo $this->session->userdata('username');?></h4>
+                                        <!-- <p class=" m-b-0">admin@gmail.com</p> -->
                                     </div>
                                 </div>
                             
@@ -93,7 +94,7 @@
                     <ul id="sidebarnav">
                         <br>
                         <?php 
-                        if($this->session->userdata('id_user_level') == 1){
+                        if($this->session->userdata('level') == 'admin'){
                             ?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('beranda')?>" aria-expanded="false">
@@ -107,8 +108,7 @@
                                 </li>
                                 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('masterdata')?>
-                                           " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('Masterdata')?>" aria-expanded="false">
                                         <i class="icon-Receipt"></i>
                                         <span class="hide-menu"> Master Data</span>
                                     </a>
@@ -118,8 +118,7 @@
                                     <span class="hide-menu">Monitoring</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('monitoring')?>
-                                           " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('Note')?>" aria-expanded="false">
                                         <i class="mdi mdi-content-paste"></i>
                                         <span class="hide-menu">SKPA Note</span>
                                     </a>
@@ -129,15 +128,13 @@
                                     <span class="hide-menu">Pengaturan</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('user')?>
-                                           " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('User_data')?>" aria-expanded="false">
                                         <i class="icon-Add-User"></i>
                                         <span class="hide-menu">Manage User</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('profile/update/1')?>
-                                           " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('profile/update/1')?>" aria-expanded="false">
                                         <i class="icon-Wrench"></i>
                                         <span class="hide-menu">Data sistem</span>
                                     </a>

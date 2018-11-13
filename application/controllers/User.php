@@ -14,8 +14,7 @@ class User extends CI_Controller
         $this->load->library('datatables');
     }
 
-    public function index()
-    {   
+    public function index(){   
         $data['data_user'] = $this->Ded_m->get_all_user()->result();
         $data['user_level'] = $this->Ded_m->get_all_user_level()->result();
         $this->template->load('template','user/tbl_user_list', $data);

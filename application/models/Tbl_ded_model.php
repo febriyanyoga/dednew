@@ -34,8 +34,8 @@ class Tbl_ded_model extends CI_Model
 
     function get_all_ded(){
         $this->db->select('*');
-        $this->db->from('tbl_ded');
-        $this->db->order_by('id', 'ASC');
+        $this->db->from('tbl_skpa');
+        $this->db->order_by('id_skpa', 'ASC');
         $query = $this->db->get();
         return $query;
     }

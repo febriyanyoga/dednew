@@ -6,7 +6,33 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Obyek Data untuk Tupoksi (Nama SKPA - Nama Organisasi - Nama Sub Organisasi)</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('Masterdata/')?>">SKPA</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('Organisasi/').$skpa[0]->id_skpa?>">Organisasi</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('SubOrganisasi/').$organisasi[0]->id_organisasi?>">Sub Organisasi</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="<?php echo site_url('ObyekData/').$sub_organisasi[0]->id_suborganisasi?>">Obyek Data</a></li> -->
+                        <li class="breadcrumb-item active" aria-current="page">Objek Data</li>
+                    </ol>
+                </nav>
+                <div class="col-md-6">
+                    <table class="table" style="border-top: 1px none;">
+                        <tr>
+                            <th>SKPA</th>
+                            <td><?php echo $skpa[0]->nama_skpa;?></td>
+                        </tr>
+                        <tr>
+                            <th>Organisasi</th>
+                            <td><?php echo $organisasi[0]->nama_organisasi;?></td>
+                        </tr>
+                        <tr>
+                            <th>Sub Organisasi</th>
+                            <td><?php echo $sub_organisasi[0]->nama_suborganisasi;?></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- SKPA : <?php echo $skpa[0]->nama_skpa;?><br>Organisasi : <?php echo $organisasi[0]->nama_organisasi;?><br>Sub Organisasi : <?php echo $sub_organisasi[0]->nama_suborganisasi;?> -->
 
                 <br>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahobyekdata"><i class="fas fa-plus-circle"></i> Tambah Objek Data</button>
@@ -38,41 +64,45 @@
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
-                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Nama Objek Data</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                $i=0;
+                                foreach ($obyek_data as $obj) {
+                                    $i++;
+                                    ?>
                                     <tr>
+                                        <td style="text-align: center;"><?php echo $i;?></td>
+                                        <td style="text-align: center;"><?php echo $obj->objek_data;?></td>
                                         <td style="text-align: center;">
-                                
-                                        </td>
-                                        <td>
-                                       
-                                        </td>
-                                        <td style="text-align: center;">
-                                    
-                                        <a style="color: white;" class="btn btn-success" href="<?php echo base_url()?>masterdata/tabeldata"><i class="fa fa-edit"></i>Tabel Data</a>
-                                            <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#editskpa-<?php echo $d->id?>" title="edit"><i class="fa fa-edit"></i></a>
 
-                                            <a href="<?php echo base_url('Dedaceh/hapus_skpa/').$d->id?>"  onClick="return confirm('Anda yakin akan menghapus <?php echo $d->nama_peraturan?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
+                                            <a style="color: white;" class="btn btn-success" href="<?php echo site_url('Parameter/').$obj->id_objek_data?>"><i class="fa fa-edit"></i>Tabel Data</a>
+
+                                            <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#editskpa-<?php echo $obj->id_objek_data?>" title="edit"><i class="fa fa-edit"></i></a>
+
+                                            <a href="<?php echo base_url('hapus_obj/'.$obj->id_objek_data)?>"  onClick="return confirm('Anda yakin akan menghapus Objek Data <?php echo $obj->objek_data?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
                                         </td>
                                     </tr>
 
                                     <!-- start edit data obyek data -->
-                                    <div class="modal fade" id="editskpa-<?php echo $d->id?>" tabindex="-1" role="dialog" aria-labelledby="editskpa">
+                                    <div class="modal fade" id="editskpa-<?php echo $obj->id_objek_data?>" tabindex="-1" role="dialog" aria-labelledby="editskpa">
                                         <div class="modal-dialog" role="document">
-                                            <form action="<?php echo base_url('Dedaceh/post_update_skpa')?>" method="post">
+                                            <form action="<?php echo base_url('update_objek')?>" method="post">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="exampleModalLabel1">Data <?php echo $d->nama_peraturan?></h4>
+                                                        <h4 class="modal-title" id="exampleModalLabel1">Data <?php echo $obj->objek_data?></h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="recipient-name" class="control-label">Obyek Data :</label>
-                                                            <input type="text" class="form-control"  name="nama_peraturan" value="<?php echo $d->nama_peraturan;?>">
-                                                            <input type="hidden" class="form-control"  name="id" value="<?php echo $d->id;?>">
+                                                            <label for="recipient-name" class="control-label">Objek Data :</label>
+                                                            <input type="text" class="form-control"  name="objek_data" value="<?php echo $obj->objek_data;?>">
+                                                            <input type="hidden" class="form-control"  name="id_objek_data" value="<?php echo $obj->id_objek_data;?>">
+                                                            <input type="hidden" class="form-control"  name="id_suborganisasi" value="<?php echo $sub_organisasi[0]->id_suborganisasi;?>">
+
                                                         </div>                  
                                                     </div>
                                                     <div class="modal-footer">
@@ -83,6 +113,11 @@
                                             </form>
                                         </div>
                                     </div>
+
+                                    <?php
+                                }
+                                ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -93,7 +128,7 @@
 
     <div class="modal fade" id="tambahobyekdata" tabindex="-1" role="dialog" aria-labelledby="tambahskpa">
         <div class="modal-dialog" role="document">
-            <form action="<?php echo base_url('Dedaceh/post_skpa')?>" method="post">
+            <form action="<?php echo base_url('post_objek')?>" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel1">Tambah Obyek Data</h4>
@@ -102,7 +137,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Nama Obyek Data:</label>
-                            <input type="text" class="form-control"  name="nama_peraturan" required>
+                            <input type="text" class="form-control"  name="objek_data" required>
+                            <input type="hidden" class="form-control"  name="id_suborganisasi" value="<?php echo $sub_organisasi[0]->id_suborganisasi?>" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -113,21 +149,4 @@
             </form>
         </div>
     </div>
-
-  
-
-
-        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#zero_config-<?php echo $key->id?>').DataTable();
-            } 
-            );
-        </script>
-
-    <!-- end looping modal dan datatabel -->
-
-
 </div>

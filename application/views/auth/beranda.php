@@ -3,6 +3,7 @@
 </div><br>
 <div class="card-group">
     <?php
+    // print_r($ded);
     $u=0;
     $t=0;
     $e=0;
@@ -127,7 +128,7 @@
                                     <?php echo $i;?>
                                 </td>
                                 <td>
-                                    <?php echo $d->nama_peraturan;?>
+                                    <?php echo $d->nama_skpa;?>
                                 </td>
                                 <td class="text-center">
                                     <?php echo $d->unit;?>
@@ -144,7 +145,7 @@
                                 <td class="text-center">
                                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dokumen-<?php echo $d->id?>">Detail</button>
                                 </td>
-                                <td class="text-center"><a href="<?php echo site_url('beranda/read/').$d->id; ?>" class="btn waves-effect waves-light btn-primary">Detail</button><i class="icon-eye" aria-hidden="true"></i></a></td>
+                                <td class="text-center"><a href="<?php echo site_url('Read').$d->id; ?>" class="btn waves-effect waves-light btn-primary">Detail</button><i class="icon-eye" aria-hidden="true"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -181,7 +182,7 @@ foreach ($ded as $key) {
                         </thead>
                         <tbody>
                             <?php
-                            $data = $Ded_m->get_dokumen_by_id_ded($key->id)->result();
+                            $data = $Ded_m->get_dokumen_by_id_skpa($key->id_skpa)->result();
                                 // print_r($Ded_m);
                             $i=0;
                             foreach ($data as $key) {

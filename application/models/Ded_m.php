@@ -63,14 +63,63 @@ class Ded_m extends CI_Model
 
     public function get_all_ded_(){
         $this->db->select('*');
-        $this->db->from('tbl_ded');
+        $this->db->from('tbl_skpa');
         return $this->db->get();
     }
 
-    public function get_all_ded_by_id($id){
+    public function get_all_organisasi($id_skpa){
         $this->db->select('*');
-        $this->db->from('tbl_ded');
-        $this->db->where('id', $id);
+        $this->db->where('id_skpa', $id_skpa);
+        $this->db->from('tbl_organisasi');
+        return $this->db->get();
+    }
+
+    public function get_all_ded_by_id($id_skpa){
+        $this->db->select('*');
+        $this->db->from('tbl_skpa');
+        $this->db->where('id_skpa', $id_skpa);
+        return $this->db->get();
+    }
+
+    public function get_all_organisasi_by_id($id_organisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_organisasi');
+        $this->db->where('id_organisasi', $id_organisasi);
+        return $this->db->get();
+    }
+
+    public function get_all_sub_organisasi_by_id($id_organisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_suborganisasi');
+        $this->db->where('id_organisasi', $id_organisasi);
+        return $this->db->get();
+    }
+
+    public function get_all_suborganisasi_by_id($id_suborganisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_suborganisasi');
+        $this->db->where('id_suborganisasi', $id_suborganisasi);
+        return $this->db->get();
+    }
+
+    public function get_all_obyek_data_by_id($id_suborganisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_objek_data');
+        $this->db->where('id_suborganisasi', $id_suborganisasi);
+        return $this->db->get();
+    }
+
+    public function get_all_obyek_data($id_objek_data){
+        $this->db->select('*');
+        $this->db->from('tbl_objek_data');
+        $this->db->where('id_objek_data', $id_objek_data);
+        return $this->db->get();
+    }
+
+    public function get_all_parameter_by_obj($id_objek_data){
+        $this->db->select('*');
+        $this->db->from('tbl_parameter');
+        $this->db->where('id_objek_data', $id_objek_data);
         return $this->db->get();
     }
 
@@ -89,9 +138,65 @@ class Ded_m extends CI_Model
         return TRUE;
     }
 
+    public function post_data_parameter($data){
+        $this->db->insert('tbl_parameter',$data);
+        return TRUE;
+    }
+
+    public function post_data_objek_data($data){
+        $this->db->insert('tbl_objek_data',$data);
+        return TRUE;
+    }
+
+    public function post_data_sub_organisasi($data){
+        $this->db->insert('tbl_suborganisasi',$data);
+        return TRUE;
+    }
+
+    public function post_data_organisasi($data){
+        $this->db->insert('tbl_organisasi',$data);
+        return TRUE;
+    }
+
+    public function post_update_data_organisasi($id_organisasi, $data){
+        $this->db->where('id_organisasi', $id_organisasi);
+        $this->db->update('tbl_organisasi', $data);
+        return TRUE;
+    }
+
+    public function post_update_data_sub_organisasi($id_suborganisasi, $data){
+        $this->db->where('id_suborganisasi', $id_suborganisasi);
+        $this->db->update('tbl_suborganisasi', $data);
+        return TRUE;
+    }
+
+    public function post_update_objek_data($id_objek_data, $data){
+        $this->db->where('id_objek_data', $id_objek_data);
+        $this->db->update('tbl_objek_data', $data);
+        return TRUE;
+    }
+
+    public function post_update_data_parameter($id_parameter, $data){
+        $this->db->where('id_parameter', $id_parameter);
+        $this->db->update('tbl_parameter', $data);
+        return TRUE;
+    }
+
     public function hapus_detail($id_detail){
         $this->db->where('id_detail', $id_detail);
         $this->db->delete('tbl_detail');
+        return TRUE;
+    }
+
+    public function hapus_parameter($id_parameter){
+        $this->db->where('id_parameter', $id_parameter);
+        $this->db->delete('tbl_parameter');
+        return TRUE;
+    }
+
+    public function hapus_objek_data($id_objek_data){
+        $this->db->where('id_objek_data', $id_objek_data);
+        $this->db->delete('tbl_objek_data');
         return TRUE;
     }
 
@@ -102,26 +207,38 @@ class Ded_m extends CI_Model
     }
 
     public function post_data_skpa($data){
-        $this->db->insert('tbl_ded',$data);
+        $this->db->insert('tbl_skpa',$data);
         return TRUE;
     }
 
-    public function post_data_update_skpa($id, $data){
-        $this->db->where('id', $id);
-        $this->db->update('tbl_ded', $data);
+    public function post_data_update_skpa($id_skpa, $data){
+        $this->db->where('id_skpa', $id_skpa);
+        $this->db->update('tbl_skpa', $data);
         return TRUE;
     }
 
-    public function hapus_ded($id){
-        $this->db->where('id', $id);
-        $this->db->delete('tbl_ded');
+    public function hapus_ded($id_skpa){
+        $this->db->where('id_skpa', $id_skpa);
+        $this->db->delete('tbl_skpa');
         return TRUE;
     }
 
-    public function get_dokumen_by_id_ded($id_ded){
+    public function hapus_organisasi($id_organisasi){
+        $this->db->where('id_organisasi', $id_organisasi);
+        $this->db->delete('tbl_organisasi');
+        return TRUE;
+    }
+
+    public function hapus_suborganisasi($id_suborganisasi){
+        $this->db->where('id_suborganisasi', $id_suborganisasi);
+        $this->db->delete('tbl_suborganisasi');
+        return TRUE;
+    }
+
+    public function get_dokumen_by_id_skpa($id_skpa){
         $this->db->select('*');
         $this->db->from('tbl_dokumen');
-        $this->db->where('id_ded', $id_ded);
+        $this->db->where('id_skpa', $id_skpa);
         return $this->db->get();
     }
 
@@ -145,9 +262,9 @@ class Ded_m extends CI_Model
         }
     }
 
-    public function save($upload,$id_ded, $nama_dokumen){
+    public function save($upload,$id_skpa, $nama_dokumen){
         $data = array(
-            'id_ded'            => $id_ded,
+            'id_skpa'           => $id_skpa,
             'nama_dokumen'      => $nama_dokumen,
             'nama_file'         => $upload['file']['file_name'],
         );
@@ -167,8 +284,8 @@ class Ded_m extends CI_Model
 
 
     // skpa note
-    public function get_all_note_by_skpa($id_ded){
-        $this->db->where('id_ded', $id_ded);
+    public function get_all_note_by_skpa($id_skpa){
+        $this->db->where('id_skpa', $id_skpa);
         return $this->db->get('tbl_note');
     }
 
@@ -197,26 +314,25 @@ class Ded_m extends CI_Model
     }
 
     public function post_data_user($data){
-        $this->db->insert('tbl_user', $data);
+        $this->db->insert('tbl_skpa', $data);
         return TRUE;
     }
 
     public function get_all_user(){
         $this->db->select('*');
-        $this->db->from('tbl_user U');
-        $this->db->join('tbl_user_level L','U.id_user_level = L.id_user_level');
+        $this->db->from('tbl_skpa');
         return $this->db->get();
     }
 
-    public function post_update_data_user($id_users, $data){
-        $this->db->where('id_users', $id_users);
-        $this->db->update('tbl_user', $data);
+    public function post_update_data_user($id_skpa, $data){
+        $this->db->where('id_skpa', $id_skpa);
+        $this->db->update('tbl_skpa', $data);
         return TRUE;
     }
 
-    public function hapus_user($id_users){
-        $this->db->where('id_users', $id_users);
-        $this->db->delete('tbl_user');
+    public function hapus_user($id_skpa){
+        $this->db->where('id_skpa', $id_skpa);
+        $this->db->delete('tbl_skpa');
         return TRUE;
     }
     // end user

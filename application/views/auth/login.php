@@ -44,7 +44,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="email" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control form-control-lg" name="username" placeholder="Username" aria-label="username" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">

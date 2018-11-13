@@ -42,7 +42,7 @@ function rename_string_is_aktif($string){
 
 function is_login(){
     $ci = get_instance();
-    if(empty($ci->session->userdata('id_users'))){
+    if($ci->session->userdata('logged_in') != TRUE ){
         redirect('auth');
     }
 }

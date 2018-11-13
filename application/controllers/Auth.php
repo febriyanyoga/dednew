@@ -17,33 +17,52 @@ Class Auth extends CI_Controller{
     }
     
     function cheklogin(){
-        $email      = $this->input->post('email');
+        $username   = $this->input->post('username');
         $password   = $this->input->post('password');
         // query chek users
-        $this->db->where('email',$email);
+        $this->db->where('username',$username);
         $this->db->where('password',  md5($password));
-        $user       = $this->db->get('tbl_user');
+        $user = $this->db->get('tbl_skpa');
+
         if($this->Ded_m->check_captcha() == TRUE){
-            if ($this->session->set_userdata('login') == TRUE && $this->session->set_userdata('id_user_level') == '1' OR $this->session->set_userdata('id_user_level') == '2') {
-    			redirect('beranda');
-            } else {
-                if($user->num_rows()>0){
-                    // retrive user data to session
-                    $this->session->set_userdata($user->row_array());
-                    redirect('beranda');
+            if($user->num_rows()>0){
+                if($user->row()->status == 'aktif'){
+                    if($user->row()->level == 'admin'){
+                        $userData       = array(
+                            'username'  => $user->row()->username,
+                            'level'     => $user->row()->level,
+                            'status'    => $user->row()->status,
+                            'logged_in' => TRUE,
+                        );
+                        $this->session->set_userdata($userData);
+                        redirect('Admin');
+                    }elseif ($user->row()->level == 'user'){
+                        $userData       = array(
+                            'username'  => $user->row()->username,
+                            'level'     => $user->row()->level,
+                            'status'    => $user->row()->status,
+                            'logged_in' => TRUE,
+                        );
+                        $this->session->set_userdata($userData);
+                        redirect('User');
+                    }else{
+                        $this->session->set_flashdata('status_login','anda bukan user');
+                        redirect('auth');
+                    }
                 }else{
-                    $this->session->set_flashdata('status_login','email atau password yang anda input salah');
+                    $this->session->set_flashdata('status_login','akun anda belum aktif');
                     redirect('auth');
                 }
+            }else{
+                $this->session->set_flashdata('status_login','email atau password yang anda input salah');
+                redirect('auth');
             }
         }else{
             $this->session->set_flashdata('status_login','Captcha salah');
             redirect('auth');
         }
-        
-        
     }
-    
+
     function logout(){
         $this->session->sess_destroy();
         $this->session->set_flashdata('status_login','Anda sudah berhasil keluar dari aplikasi');

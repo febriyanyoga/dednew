@@ -52,3 +52,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// admin pindah halaman
+$route['Admin'] 		= 'AdminC';
+$route['Read'] 			= 'AdminC/read';
+$route['Masterdata'] 	= 'AdminC/masterdata';
+$route['Note']			= 'AdminC/skpa_note';	
+$route['User_data']		= 'AdminC/user_data';	
+
+$route['skpa_note/(:num)']	= 'AdminC/skpanote/$1';
+$route['Organisasi/(:num)']	= 'AdminC/organisasi/$1';
+$route['SubOrganisasi/(:num)']	= 'AdminC/sub_organisasi/$1';
+$route['ObyekData/(:num)']	= 'AdminC/obyek_data/$1';
+$route['Parameter/(:num)']	= 'AdminC/parameter/$1';
+
+
+// skpa event
+$route['post_skpa']		= 'AdminC/post_skpa';
+$route['update_skpa']	= 'AdminC/post_update_skpa';
+$route['post_dokumen']	= 'AdminC/post_dokumen_skpa';
+$route['hapus_skpa/(:num)'] 	= 'AdminC/hapus_skpa/$1';
+$route['hapus_dokumen/(:num)'] 	= 'AdminC/delete_dokumen_skpa/$1';
+
+$route['post_organisasi']		= 'AdminC/post_organisasi';
+$route['post_update_organisasi'] = 'AdminC/post_update_organisasi';
+$route['hapus_org/(:num)'] 		= 'AdminC/hapus_organisasi/$1';
+
+$route['post_sub_organisasi'] 	= 'AdminC/post_sub_organisasi';
+$route['update_suborganisasi']	= 'AdminC/post_update_sub_organisasi';
+$route['hapus_suborg/(:num)'] 		= 'AdminC/hapus_suborganisasi/$1';
+
+$route['post_objek'] = 'AdminC/post_objek_data';
+$route['update_objek'] = 'AdminC/post_update_objek_data';
+$route['hapus_obj/(:num)'] = 'AdminC/hapus_objek_data/$1';
+
+$route['post_parameter'] = 'AdminC/post_parameter';
+$route['update_parameter'] = 'AdminC/post_update_parameter';
+$route['hapus_par/(:num)'] = 'AdminC/hapus_parameter/$1';
+
+$route['hapus_note/(:num)'] = 'AdminC/hapus_note/$1';
+$route['post_ubah_note'] = 'AdminC/post_ubah_note';
+$route['post_note'] = 'AdminC/post_note';
+
+$route['post_user'] = 'AdminC/post_user';
+
+
+
+
+// user
+$route['User'] 	= "UserC";

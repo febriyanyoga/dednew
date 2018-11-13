@@ -70,7 +70,7 @@
                                     <td  class="text-center">
                                         <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#edit-<?php echo $n->id_note?>" title="edit"><i class="fa fa-edit"></i></a>
 
-                                        <a href="<?php echo base_url('Monitoring/hapus_note/').$n->id_note?>"  onClick="return confirm('Anda yakin akan menghapus <?php echo $n->judul?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
+                                        <a href="<?php echo base_url('hapus_note/').$n->id_note?>"  onClick="return confirm('Anda yakin akan menghapus <?php echo $n->judul?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
                                     </td>
                                 </tr>
 
@@ -78,7 +78,7 @@
                                 <!-- start edit note -->
                                 <div class="modal fade" id="edit-<?php echo $n->id_note;?>" tabindex="-1" role="dialog" aria-labelledby="tambahnote">
                                     <div class="modal-dialog" role="document">
-                                        <form action="<?php echo site_url('Monitoring/post_ubah_note')?>" method="post">
+                                        <form action="<?php echo site_url('post_ubah_note')?>" method="post">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="exampleModalLabel1">Ubah Catatan</h4>
@@ -88,7 +88,7 @@
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Judul:</label>
                                                         <input type="text" class="form-control"  name="judul" required value="<?php echo $n->judul?>">
-                                                        <input type="hidden" class="form-control"  name="id_ded" value="<?php echo $id_ded?>" required>
+                                                        <input type="hidden" class="form-control"  name="id_skpa" value="<?php echo $id_skpa?>" required>
                                                         <input type="hidden" class="form-control"  name="id_note" value="<?php echo $n->id_note?>" required>
                                                     </div>
                                                     <div class="form-group">
@@ -97,7 +97,18 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="message-text" class="control-label">Catatan:</label>
-                                                        <textarea class="form-control" id="message-text1" name="note" required><?php echo $n->note?></textarea>
+                                                        <!-- <textarea class="form-control" id="message-text1" name="note" required><?php echo $n->note?></textarea> -->
+                                                        <textarea class="form-control" name="note" id="editor-<?php echo $n->id_note?>" rows="3"><?php echo $n->note?></textarea>
+                                                        <script>
+                                                            ClassicEditor
+                                                            .create( document.querySelector( '#editor-<?php echo $n->id_note?>' ) )
+                                                            .then( editor => {
+                                                                console.log( editor );
+                                                            } )
+                                                            .catch( error => {
+                                                                console.error( error );
+                                                            } );
+                                                        </script>
                                                     </div> 
                                                 </div>
                                                 <div class="modal-footer">
@@ -124,7 +135,7 @@
 
 <div class="modal fade" id="tambahnote" tabindex="-1" role="dialog" aria-labelledby="tambahnote">
     <div class="modal-dialog" role="document">
-        <form action="<?php echo site_url('Monitoring/post_note')?>" method="post">
+        <form action="<?php echo site_url('post_note')?>" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel1">Tambah Catatan</h4>
@@ -134,7 +145,7 @@
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Judul:</label>
                         <input type="text" class="form-control"  name="judul" required>
-                        <input type="hidden" class="form-control"  name="id_ded" value="<?php echo $id_ded?>" required>
+                        <input type="hidden" class="form-control"  name="id_skpa" value="<?php echo $id_skpa?>" required>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Tanggal:</label>
@@ -142,7 +153,17 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="control-label">Catatan:</label>
-                        <textarea class="form-control" id="message-text1" name="note" required></textarea>
+                        <textarea class="form-control" name="note" id="editor" rows="3"></textarea>
+                        <script>
+                            ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .then( editor => {
+                                console.log( editor );
+                            } )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                        </script>
                     </div> 
                 </div>
                 <div class="modal-footer">

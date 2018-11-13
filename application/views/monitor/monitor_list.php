@@ -27,10 +27,10 @@
                                             <?php echo $i;?>
                                         </td>
                                         <td>
-                                            <?php echo $d->nama_peraturan;?>
+                                            <?php echo $d->nama_skpa;?>
                                         </td>
                                         <td class="text-center">
-                                        <a href="<?php echo site_url('monitoring/skpanote/').$d->id; ?>"   
+                                        <a href="<?php echo site_url('skpa_note/').$d->id_skpa; ?>"   
                                            class="btn btn-success"><i class="far fa-edit"></i></a>
                                         </td>
                                     </tr>
