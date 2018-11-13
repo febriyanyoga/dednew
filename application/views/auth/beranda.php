@@ -2,95 +2,85 @@
     <h2 class="text-center"> Dashboard </h2>
 </div><br>
 <div class="card-group">
-    <?php
-    // print_r($ded);
-    $u=0;
-    $t=0;
-    $e=0;
-    foreach ($ded as $d) {
-     $u = $u + $d->unit;
-     $t = $t + $d->tupoksi;
-     $e = $e + $d->jml_database;
- }
- ?>
- <!-- Card -->
- <div class="container-fluid">
- <div class="card-group">
- <div class="card">
-    <div class="card-body">
-        <div class="d-flex align-items-center">
-            <div class="m-r-10">
-                <span class="btn btn-circle btn-lg bg-danger">
-                    <i class="ti-clipboard text-white"></i>
-                </span>
-            </div>
-            <div>
-                Total SKPA =
-            </div>
-            <div class="ml-auto">
-                <h2 class="m-b-0 font-light">&nbsp <?php echo $jumlah_skpa;?></h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex align-items-center">
-            <div class="m-r-10">
-                <span class="btn btn-circle btn-lg btn-info">
-                    <i class="ti-clipboard text-white"></i>
-                </span>
-            </div>
-            <div>
-                Total Unit =
-            </div>
-            <div class="ml-auto">
-                <h2 class="m-b-0 font-light">&nbsp<?php echo $u;?></h2>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Card -->
-<!-- Card -->
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex align-items-center">
-            <div class="m-r-10">
-                <span class="btn btn-circle btn-lg bg-success">
-                    <i class="ti-clipboard text-white"></i>
-                </span>
-            </div>
-            <div>
-                Total Tupoksi =
 
-            </div>
-            <div class="ml-auto">
-                <h2 class="m-b-0 font-light">&nbsp<?php echo $t;?></h2>
+   <!-- Card -->
+   <div class="container-fluid">
+       <div class="card-group">
+           <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-danger">
+                            <i class="ti-clipboard text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total SKPA =
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">&nbsp <?php echo $jumlah_skpa;?></h2>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Card -->
-<!-- Card -->
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex align-items-center">
-            <div class="m-r-10">
-                <span class="btn btn-circle btn-lg bg-warning">
-                    <i class="ti-clipboard text-white"></i>
-                </span>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg btn-info">
+                            <i class="ti-clipboard text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Organisasi =
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">&nbsp<?php echo $jumlah_org;?></h2>
+                    </div>
+                </div>
             </div>
-            <div>
-                Total Database =
+        </div>
+        <!-- Card -->
+        <!-- Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-success">
+                            <i class="ti-clipboard text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Sub Organisasi =
 
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">&nbsp<?php echo $jumlah_suborg;?></h2>
+                    </div>
+                </div>
             </div>
-            <div class="ml-auto">
-                <h2 class="m-b-0 font-light">&nbsp<?php echo $e;?></h2>
+        </div>
+        <!-- Card -->
+        <!-- Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-warning">
+                            <i class="ti-clipboard text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Objek Data =
+
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">&nbsp<?php echo $jumlah_obj;?></h2>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 <!-- Card -->
 <!-- Column -->
@@ -111,8 +101,7 @@
                                 <th class="text-center">SKPA</th>
                                 <th class="text-center">Jumlah Organisasi</th>
                                 <th class="text-center">Jumlah Sub Organisasi</th>
-                                <th class="text-center">Jumlah Tupoksi</th>
-                                <th class="text-center">Jumlah Database</th>
+                                <th class="text-center">Jumlah Objek Data</th>
                                 <th class="text-center">Dokumen Pendukung</th>
                                 <th class="text-center">DED</th>
                             </tr>
@@ -121,9 +110,9 @@
                             <?php
                             $i = 0;
                             foreach($ded as $d){
-                             $i++;
-                             ?>
-                             <tr>
+                               $i++;
+                               ?>
+                               <tr>
                                 <td>
                                     <?php echo $i;?>
                                 </td>
@@ -131,21 +120,27 @@
                                     <?php echo $d->nama_skpa;?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $d->unit;?>
+                                    <?php
+                                    $jml_org = $Beranda_model->get_all_org_by_id_skpa($d->id_skpa)->num_rows();
+                                    echo $jml_org;
+                                    ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $d->unit;?>
+                                    <?php
+                                    $jml_suborg = $Beranda_model->get_all_suborg_by_id_skpa($d->id_skpa)->num_rows();
+                                    echo $jml_suborg;
+                                    ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $d->tupoksi;?>
+                                    <?php 
+                                    $jml_obj = $Beranda_model->get_all_obj_by_id_skpa($d->id_skpa)->num_rows();
+                                    echo $jml_obj;
+                                    ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $d->jml_database;?>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dokumen-<?php echo $d->id_skpa?>">Detail</button>
                                 </td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dokumen-<?php echo $d->id?>">Detail</button>
-                                </td>
-                                <td class="text-center"><a href="<?php echo site_url('Read').$d->id; ?>" class="btn waves-effect waves-light btn-primary">Detail</button><i class="icon-eye" aria-hidden="true"></i></a></td>
+                                <td class="text-center"><a href="<?php echo site_url('Read/').$d->id_skpa; ?>" class="btn waves-effect waves-light btn-primary">Detail</button><i class="icon-eye" aria-hidden="true"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -163,7 +158,7 @@
 <?php
 foreach ($ded as $key) {
     ?>
-    <div class="modal fade" id="dokumen-<?php echo $key->id?>" tabindex="-1" role="dialog" aria-labelledby="dokumen">
+    <div class="modal fade" id="dokumen-<?php echo $key->id_skpa?>" tabindex="-1" role="dialog" aria-labelledby="dokumen">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,7 +167,7 @@ foreach ($ded as $key) {
                 </div>
 
                 <div class="modal-body">
-                    <table id="zero_config-<?php echo $key->id?>" class="table table-striped table-bordered display">
+                    <table id="zero_config-<?php echo $key->id_skpa?>" class="table table-striped table-bordered display">
                         <thead>
                             <tr>
                                 <th width="30px">No</th>
@@ -208,6 +203,16 @@ foreach ($ded as $key) {
             </div>
         </div>
     </div>
+
+    <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
+    <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#zero_config-<?php echo $key->id_skpa?>').DataTable();
+        } 
+        );
+    </script>
     
     <?php
 }

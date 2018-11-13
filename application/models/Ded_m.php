@@ -124,12 +124,11 @@ class Ded_m extends CI_Model
     }
 
     // datatables
-    public function get_all_ded($id){
+    public function get_all_ded($id_skpa){
         $this->db->select('*');
-        $this->db->from('tbl_detail T');
-        $this->db->join('tbl_ded D','T.id_ded = D.id');
-        $this->db->where('T.id_ded',$id);
-        $this->db->order_by('T.id_detail', 'ASC');
+        $this->db->from('tbl_skpa');
+        $this->db->where('id_skpa',$id_skpa);
+        $this->db->order_by('id_skpa', 'ASC');
         return $this->db->get();
     }
 

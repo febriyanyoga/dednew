@@ -97,7 +97,7 @@
                         if($this->session->userdata('level') == 'admin'){
                             ?>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('beranda')?>" aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo site_url('Admin')?>" aria-expanded="false">
                                         <i class="icon-Car-Wheel"></i>
                                         <span class="hide-menu">Dashboards </span>
                                     </a>

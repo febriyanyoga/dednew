@@ -56,10 +56,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 // admin pindah halaman
 $route['Admin'] 		= 'AdminC';
-$route['Read'] 			= 'AdminC/read';
+$route['Read/(:num)'] 	= 'AdminC/read/$1';
 $route['Masterdata'] 	= 'AdminC/masterdata';
 $route['Note']			= 'AdminC/skpa_note';	
-$route['User_data']		= 'AdminC/user_data';	
+$route['User_data']		= 'AdminC/user_data';
+$route['Dashboard']		= 'AdminC/dashboard';
 
 $route['skpa_note/(:num)']	= 'AdminC/skpanote/$1';
 $route['Organisasi/(:num)']	= 'AdminC/organisasi/$1';
@@ -96,6 +97,8 @@ $route['post_ubah_note'] = 'AdminC/post_ubah_note';
 $route['post_note'] = 'AdminC/post_note';
 
 $route['post_user'] = 'AdminC/post_user';
+$route['update_user'] = 'AdminC/post_update_user';
+$route['hapus_usr/(:num)'] = 'AdminC/hapus_user/$1';
 
 
 

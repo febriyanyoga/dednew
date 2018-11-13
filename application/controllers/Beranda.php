@@ -15,8 +15,7 @@ class Beranda extends CI_Controller
         $this->load->helper('form', 'url');
 
     }
-    public function index()
-    {
+    public function index(){
         $data = array();
         $data['Ded_m'] = $this->Ded_m;
         $data['ded'] = $this->Beranda_model->get_all_ded()->result();

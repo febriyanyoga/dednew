@@ -71,14 +71,14 @@
                                     </td>
                                     <td class="text-center">
                                         <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#edit-<?php echo $user->id_skpa?>" title="edit"><i class="fa fa-edit"></i></a>
-                                        <a href="<?php echo base_url('User/hapus_user/').$user->id_skpa?>"  onClick="return confirm('Anda yakin akan menghapus <?php echo $user->full_name?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
+                                        <a href="<?php echo base_url('hapus_usr/').$user->id_skpa?>"  onClick="return confirm('Anda yakin akan menghapus <?php echo $user->full_name?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
                                     </td>
                                 </tr>
 
                                 <!-- start modal edit -->
                                 <div class="modal fade" id="edit-<?php echo $user->id_skpa?>" tabindex="-1" role="dialog" aria-labelledby="edit-<?php echo $user->id_skpa?>">
                                     <div class="modal-dialog" role="document">
-                                        <form action="<?php echo site_url('User/post_update_user')?>" method="post">
+                                        <form action="<?php echo site_url('update_user')?>" method="post">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="exampleModalLabel1">Ubah User-<?php echo $user->username?></h4>

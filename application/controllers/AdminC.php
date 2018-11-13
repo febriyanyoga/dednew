@@ -15,18 +15,26 @@ class AdminC extends CI_Controller
         $this->load->helper('form', 'url');
 
     }
-    public function index()
-    {
+
+    public function index(){
         $data = array();
         $data['Ded_m'] = $this->Ded_m;
+        $data['Beranda_model'] = $this->Beranda_model;
         $data['ded'] = $this->Beranda_model->get_all_ded()->result();
+
+
+        $data['jumlah_org'] = $this->Beranda_model->get_all_org()->num_rows();
+        $data['jumlah_suborg'] = $this->Beranda_model->get_all_suborg()->num_rows();
+        $data['jumlah_obj'] = $this->Beranda_model->get_all_obj()->num_rows();
         $data['jumlah_skpa'] = $this->Beranda_model->get_all_ded()->num_rows();
         $this->template->load('template','auth/beranda', $data);
     } 
 
-    public function read($id_ded){
-        $data['nama_regulasi'] = $this->Ded_m->get_all_ded_by_id($id_ded)->result()[0]->regulasi;
-        $data['ded'] = $this->Ded_m->get_all_ded($id_ded)->result();
+    public function read($id_skpa){
+        $data['Beranda_model'] = $this->Beranda_model;
+        $data['skpa'] = $this->Ded_m->get_all_ded_by_id($id_skpa)->result()[0];
+        $data['ded'] = $this->Ded_m->get_all_ded($id_skpa)->result();
+        $data['all'] = $this->Beranda_model->get_all_data($id_skpa)->result();
         $this->template->load('template','auth/beranda_read', $data);
     }
 
@@ -609,6 +617,16 @@ class AdminC extends CI_Controller
                 $this->session->set_flashdata('error','Data anda tidak berhasil disimpan');
                 redirect_back(); 
             }
+        }
+    }
+
+    public function hapus_user($id_skpa){
+        if($this->Ded_m->hapus_user($id_skpa)){
+            $this->session->set_flashdata('sukses','Data anda berhasil dihapus');
+            redirect_back(); 
+        }else{
+            $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+            redirect_back(); 
         }
     }
 }
