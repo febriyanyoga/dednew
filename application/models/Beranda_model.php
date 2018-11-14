@@ -86,7 +86,9 @@ class Beranda_model extends CI_Model
         $this->db->from('tbl_parameter P');
         $this->db->join('tbl_objek_data D','P.id_objek_data = D.id_objek_data');
         $this->db->join('tbl_suborganisasi S','D.id_suborganisasi = S.id_suborganisasi');
-        $this->db->where('S.id_organisasi', $id_organisasi);
+        $this->db->join('tbl_organisasi O','S.id_organisasi = O.id_organisasi');
+
+        $this->db->where('O.id_organisasi', $id_organisasi);
         return $this->db->get();
     }
 

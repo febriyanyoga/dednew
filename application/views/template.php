@@ -212,3 +212,4 @@
 <script src="<?php echo base_url()?>assets/dist/js/pages/datatable/datatable-basic.init.js"></script>
 
 
+
