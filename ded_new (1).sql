@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 13 Nov 2018 pada 23.28
+-- Generation Time: 14 Nov 2018 pada 08.30
 -- Versi Server: 5.7.17-log
 -- PHP Version: 5.6.30
 
@@ -38,7 +38,7 @@ CREATE TABLE `captcha` (
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(41, 1542151605, '::1', '92732964');
+(42, 1542160818, '::1', '23811149');
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,14 @@ CREATE TABLE `tbl_objek_data` (
 --
 
 INSERT INTO `tbl_objek_data` (`id_objek_data`, `id_suborganisasi`, `objek_data`) VALUES
-(1, 1, 'ip_khskdddddd');
+(1, 1, 'pga99_ surat masuk'),
+(2, 1, 'pga99_surat_keluar'),
+(3, 1, 'pga99_asset'),
+(4, 1, 'pga99_inventaris'),
+(5, 1, 'pga99_pegawai'),
+(6, 1, 'pga99_perundang-undangan'),
+(7, 1, 'pga99_humas_dan_protokoler'),
+(8, 3, '');
 
 -- --------------------------------------------------------
 
@@ -105,9 +112,8 @@ CREATE TABLE `tbl_organisasi` (
 --
 
 INSERT INTO `tbl_organisasi` (`id_organisasi`, `id_skpa`, `nama_organisasi`, `tugas`, `fungsi`) VALUES
-(4, 1, 'karang taruna', '<ol><li>oke</li><li>iya</li><li>&nbsp;</li></ol>', '<ol><li>iyes</li><li>oke</li><li>&nbsp;</li></ol>'),
-(5, 3, 'Pokmaswas Hamengkubengawan', '<ol><li>bersih bersih sungai</li></ol>', '<ol><li>merawat sungai</li></ol>'),
-(6, 1, 'Pokmaswas Hamengkubengawan', '<p>1</p>', '<p>1</p>');
+(1, 3, 'Inspektur', '<p>Melakukan pengawasan terhadap pelaksanaan urusan pemerintahan di daerah provinsi, pelaksanaan pembinaan atas penyelenggaraan pemerintahan daerah kab/kota dan pelaksanaan urusan pemerintahan di kab/kota melaksanakan tugas umum pemerintahan dan pembangunan di bidang Pemerintahan Umum</p>', '<ol><li>perumusan kebijakan teknis bidang pengawasan&nbsp;<br>dan fasilitas pengawasan;</li><li>pelaksanaan pengawasan internal terhadap kinerja&nbsp;<br>dan keuangan melalui audit, reviu, evaluasi,&nbsp;<br>pemantauan, dan kegiatan pengawasan lainnya;</li><li>pelaksanaan pengawasan untuk tujuan tertentu&nbsp;<br>atas penugasan dari gubernur;</li><li>penyusunan laporan hasil pengawasan;</li><li>pelaksanaan administrasi inspektorat provinsi; dan</li><li>pelaksanaan tugas-tugas kedinasan lainnya yang&nbsp;<br>diberikan oleh Gubernur sesuai dengan tugas dan&nbsp;<br>fungsinya.</li></ol>'),
+(3, 3, 'Sekretariat', '<p>Melakukan pengelolaan urusan administrasi, umum, perlengkapan, peralatan, kerumahtanggaan, perpustakaan, keuangan, kepegawaian, ketatalaksanaan, hubungan masyarakat, hukum, perundang-undangan, pelayanan administrasi, penyusunan program dan pelaporan</p>', '<p>a.&nbsp;&nbsp; pelaksanaan urusan ketatausahaan, rumah tangga, barang inventaris, aset, perlengkapan, peralatan, pemeliharaan dan perpustakaan;</p><p>b.&nbsp;&nbsp; pembinaan kepegawaian, organisasi, ketatalaksanaan, hukum dan perundang-undangan serta pelaksanaan hubungan masyarakat</p><p>c.&nbsp;&nbsp;&nbsp; pengelolaan administrasi keuangan;</p><p>d.&nbsp;&nbsp; penyusunan program kerja tahunan, jangka menengah dan jangka panjang;</p><p>e.&nbsp;&nbsp;&nbsp; penyusunan rencana anggaran yang bersumber dari APBA, APBN dan sumber lainnya;</p><p>f.&nbsp;&nbsp;&nbsp;&nbsp; penyusunan rencana strategis, laporan akuntabilitas kinerja dan rencana kinerja Inspektorat Aceh; dan</p><p>g. &nbsp; &nbsp;pelaksanaan tugas-tugas kedinasan lainnya yang diberikan oleh Inspektur Aceh sesuai dengan tugas dan fungsinya.</p>');
 
 -- --------------------------------------------------------
 
@@ -118,7 +124,7 @@ INSERT INTO `tbl_organisasi` (`id_organisasi`, `id_skpa`, `nama_organisasi`, `tu
 CREATE TABLE `tbl_parameter` (
   `id_parameter` int(12) NOT NULL,
   `id_objek_data` int(15) NOT NULL,
-  `nama_parameter` varchar(11) NOT NULL,
+  `nama_parameter` varchar(50) NOT NULL,
   `tipe_data` enum('string','numeric','text','date') NOT NULL,
   `panjang_data` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -128,7 +134,45 @@ CREATE TABLE `tbl_parameter` (
 --
 
 INSERT INTO `tbl_parameter` (`id_parameter`, `id_objek_data`, `nama_parameter`, `tipe_data`, `panjang_data`) VALUES
-(1, 1, 'username', 'text', 20);
+(1, 1, 'id', 'string', 20),
+(2, 1, 'tanggal', 'date', 10),
+(3, 1, 'hal', 'string', 15),
+(4, 1, 'lampiran', 'text', 15),
+(5, 1, 'disposisi', 'text', 50),
+(6, 1, 'asal', 'text', 25),
+(7, 2, 'id', 'string', 20),
+(8, 2, 'tanggal', 'date', 10),
+(9, 2, 'hal', 'text', 15),
+(10, 2, 'lamp', 'text', 15),
+(11, 2, 'disposisi', 'text', 50),
+(12, 2, 'tujuan ', 'text', 25),
+(13, 3, 'nama', 'text', 25),
+(14, 3, 'tanggal_pembelian', 'date', 10),
+(15, 3, 'kode', 'string', 10),
+(16, 3, 'nilai', 'numeric', 20),
+(17, 4, 'id', 'numeric', 15),
+(18, 4, 'nama_barang', 'string', 25),
+(19, 4, 'tanggal_pembelian', 'date', 10),
+(20, 4, 'kode_barang', 'string', 10),
+(21, 4, 'harga_barang', 'numeric', 20),
+(22, 4, 'umur_pakai', 'numeric', 2),
+(23, 4, 'tipe_barang', 'string', 10),
+(24, 4, 'merk_barang', 'text', 10),
+(25, 5, 'id', 'numeric', 15),
+(26, 5, 'nama', 'text', 25),
+(27, 5, 'tanggal_lahir', 'date', 10),
+(28, 5, 'tempat_lahir', 'text', 20),
+(29, 5, 'tahun_masuk', 'numeric', 4),
+(30, 6, 'nomor_peraturan', 'string', 20),
+(31, 6, 'hal_peraturan', 'text', 50),
+(32, 6, 'tanggal_penetapan', 'date', 10),
+(33, 7, 'acara', 'text', 30),
+(34, 7, 'undangan', 'text', 30),
+(35, 7, 'press_realease', 'text', 100),
+(36, 7, 'kerjasama', 'text', 100),
+(37, 7, 'redaksi_website', 'string', 600),
+(38, 7, 'admin_medsos', 'string', 600),
+(39, 8, '', 'string', 0);
 
 -- --------------------------------------------------------
 
@@ -233,16 +277,17 @@ CREATE TABLE `tbl_suborganisasi` (
   `id_suborganisasi` int(15) NOT NULL,
   `id_organisasi` int(15) NOT NULL,
   `nama_suborganisasi` varchar(200) NOT NULL,
-  `tugas` varchar(2000) NOT NULL,
-  `fungsi` varchar(2000) NOT NULL
+  `tugas_sub` varchar(2000) NOT NULL,
+  `fungsi_sub` varchar(2000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `tbl_suborganisasi`
 --
 
-INSERT INTO `tbl_suborganisasi` (`id_suborganisasi`, `id_organisasi`, `nama_suborganisasi`, `tugas`, `fungsi`) VALUES
-(1, 4, 'tes', '<ol><li>f</li><li>g</li><li>l</li><li>&nbsp;</li></ol>', '<ol><li>a</li><li>b<ol><li>v</li></ol></li></ol>');
+INSERT INTO `tbl_suborganisasi` (`id_suborganisasi`, `id_organisasi`, `nama_suborganisasi`, `tugas_sub`, `fungsi_sub`) VALUES
+(1, 3, 'Sub Bagian Umum', '<p>Melakukan urusan ketatausahaan, rumah tangga, barang inventaris, aset, perlengkapan, peralatan, pemeliharaan dan perpustakaan kepegawaian, organisasi, ketatalaksanaan, hukum, perundang - undangan, pelaksanaan hubungan masyarakat dan protokoler.</p>', '<p>&nbsp;</p>'),
+(3, 1, '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -310,7 +355,7 @@ ALTER TABLE `tbl_suborganisasi`
 -- AUTO_INCREMENT for table `captcha`
 --
 ALTER TABLE `captcha`
-  MODIFY `captcha_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `captcha_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `tbl_dokumen`
 --
@@ -325,17 +370,17 @@ ALTER TABLE `tbl_note`
 -- AUTO_INCREMENT for table `tbl_objek_data`
 --
 ALTER TABLE `tbl_objek_data`
-  MODIFY `id_objek_data` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_objek_data` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_organisasi`
 --
 ALTER TABLE `tbl_organisasi`
-  MODIFY `id_organisasi` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_organisasi` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_parameter`
 --
 ALTER TABLE `tbl_parameter`
-  MODIFY `id_parameter` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_parameter` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `tbl_profil`
 --
@@ -350,7 +395,7 @@ ALTER TABLE `tbl_skpa`
 -- AUTO_INCREMENT for table `tbl_suborganisasi`
 --
 ALTER TABLE `tbl_suborganisasi`
-  MODIFY `id_suborganisasi` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_suborganisasi` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
