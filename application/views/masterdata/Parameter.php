@@ -84,14 +84,14 @@
                                         <td style="text-align: center;"><?php echo $par->tipe_data?></td>
                                         <td style="text-align: center;"><?php echo $par->panjang_data?></td>
                                         <td style="text-align: center;">
-                                            <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#editparam-<?php echo $par->id_paramater?>" title="edit"><i class="fa fa-edit"></i></a>
+                                            <a style="color: white;" class="btn btn-success" data-toggle="modal" data-target="#editparam-<?php echo $par->id_parameter?>" title="edit"><i class="fa fa-edit"></i></a>
 
                                             <a href="<?php echo base_url('hapus_par/').$par->id_parameter?>"  onClick="return confirm('Anda yakin akan menghapus parameter <?php echo $par->nama_parameter?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
                                         </td>
                                     </tr>
 
                                     <!-- start edit data skpa -->
-                                    <div class="modal fade" id="editparam-<?php echo $par->id_paramater?>" tabindex="-1" role="dialog" aria-labelledby="editparam">
+                                    <div class="modal fade" id="editparam-<?php echo $par->id_parameter?>" tabindex="-1" role="dialog" aria-labelledby="editparam">
                                         <div class="modal-dialog" role="document">
                                             <form action="<?php echo base_url('update_parameter')?>" method="post">
                                                 <div class="modal-content">

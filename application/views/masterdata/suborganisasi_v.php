@@ -71,8 +71,8 @@
                                     <tr>
                                         <td style="text-align: center;"><?php echo $i;?></td>
                                         <td style="text-align: center;"><?php echo $subor->nama_suborganisasi;?></td>
-                                        <td style="text-align: left; min-width: 250px;"><?php echo $subor->fungsi;?></td>
-                                        <td style="text-align: left; min-width: 250px;"><?php echo $subor->tugas;?></td>
+                                        <td style="text-align: left; min-width: 250px;"><?php echo $subor->fungsi_sub;?></td>
+                                        <td style="text-align: left; min-width: 250px;"><?php echo $subor->tugas_sub;?></td>
                                         <td style="text-align: center; min-width: 200px;">
                                             <a class="btn btn-sm btn-success" href="<?php echo site_url('ObyekData/'.$subor->id_suborganisasi)?>"><i class="fas fa-plus-circle"></i> Obyek Data</a>
 
@@ -100,7 +100,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Tugas:</label>
-                                                            <textarea class="form-control" name="tugas" id="editor-<?php echo $subor->id_suborganisasi?>" rows="3"><?php echo $subor->tugas?></textarea>
+                                                            <textarea class="form-control" name="tugas" id="editor-<?php echo $subor->id_suborganisasi?>" rows="3"><?php echo $subor->tugas_sub?></textarea>
                                                             <script>
                                                                 ClassicEditor
                                                                 .create( document.querySelector( '#editor-<?php echo $subor->id_suborganisasi?>' ) )
@@ -114,7 +114,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Fungsi:</label>
-                                                            <textarea class="form-control" name="fungsi" id="editor2-<?php echo $subor->id_suborganisasi?>" rows="3"><?php echo $subor->fungsi?></textarea>
+                                                            <textarea class="form-control" name="fungsi" id="editor2-<?php echo $subor->id_suborganisasi?>" rows="3"><?php echo $subor->fungsi_sub?></textarea>
                                                             <script>
                                                                 ClassicEditor
                                                                 .create( document.querySelector( '#editor2-<?php echo $subor->id_suborganisasi?>' ) )

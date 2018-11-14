@@ -139,17 +139,17 @@ class Ded_m extends CI_Model
 
     public function post_data_parameter($data){
         $this->db->insert('tbl_parameter',$data);
-        return TRUE;
+        return $this->db->insert_id();
     }
 
     public function post_data_objek_data($data){
         $this->db->insert('tbl_objek_data',$data);
-        return TRUE;
+        return $this->db->insert_id();
     }
 
     public function post_data_sub_organisasi($data){
         $this->db->insert('tbl_suborganisasi',$data);
-        return TRUE;
+        return $this->db->insert_id();
     }
 
     public function post_data_organisasi($data){

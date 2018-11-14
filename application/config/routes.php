@@ -68,6 +68,8 @@ $route['SubOrganisasi/(:num)']	= 'AdminC/sub_organisasi/$1';
 $route['ObyekData/(:num)']	= 'AdminC/obyek_data/$1';
 $route['Parameter/(:num)']	= 'AdminC/parameter/$1';
 
+$route['enough/(:num)']	= 'AdminC/insert_data_kosong/$1';
+
 
 // skpa event
 $route['post_skpa']		= 'AdminC/post_skpa';

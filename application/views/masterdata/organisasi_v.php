@@ -69,6 +69,7 @@
                                         <td style="text-align: left; min-width: 250px;"><?php echo $or->fungsi;?></td>
                                         <td style="text-align: left; min-width: 250px;"><?php echo $or->tugas;?></td>
                                         <td style="text-align: center; min-width: 200px;">
+                                            <a class="btn btn-sm btn-danger" href="<?php echo site_url('enough/'.$or->id_organisasi)?>"><i class="fas fa-ban"></i></a>
                                             <a class="btn btn-sm btn-success" href="<?php echo site_url('SubOrganisasi/'.$or->id_organisasi)?>"><i class="fas fa-plus-circle"></i> Sub Organisasi</a>
 
                                             <a style="color: white;" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editorganisasi-<?php echo $or->id_organisasi?>" title="edit"><i class="fa fa-edit"></i></a>

@@ -65,8 +65,23 @@ class Beranda_model extends CI_Model
         $this->db->join('tbl_organisasi O','S.id_organisasi = O.id_organisasi');
         $this->db->join('tbl_skpa K','O.id_skpa = K.id_skpa');
         $this->db->where('K.id_skpa', $id_skpa);
-        // $this->db->group_by('K.id_skpa');
         $this->db->order_by('K.id_skpa');
+        return $this->db->get();
+    }
+
+    function get_all_data_org($id_organisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_parameter P');
+        $this->db->join('tbl_objek_data D','P.id_objek_data = D.id_objek_data');
+        $this->db->join('tbl_suborganisasi S','D.id_suborganisasi = S.id_suborganisasi');
+        $this->db->where('S.id_organisasi', $id_organisasi);
+        return $this->db->get();
+    }
+
+    function get_all_data_objek($id_objek_data){
+        $this->db->select('*');
+        $this->db->from('tbl_parameter P');
+        $this->db->where('p.id_objek_data', $id_objek_data);
         return $this->db->get();
     }
 

@@ -34,7 +34,7 @@ class AdminC extends CI_Controller
         $data['Beranda_model'] = $this->Beranda_model;
         $data['skpa'] = $this->Ded_m->get_all_ded_by_id($id_skpa)->result()[0];
         $data['ded'] = $this->Ded_m->get_all_ded($id_skpa)->result();
-        $data['all'] = $this->Beranda_model->get_all_data($id_skpa)->result();
+        $data['all'] = $this->Beranda_model->get_all_data($id_skpa)->result_array();
         $this->template->load('template','auth/beranda_read', $data);
     }
 
@@ -261,8 +261,8 @@ class AdminC extends CI_Controller
             $data = array(
                 'id_organisasi'         => $this->input->post('id_organisasi'), 
                 'nama_suborganisasi'    => $this->input->post('nama_suborganisasi'), 
-                'tugas'                 => $this->input->post('tugas'), 
-                'fungsi'                => $this->input->post('fungsi'), 
+                'tugas_sub'             => $this->input->post('tugas'), 
+                'fungsi_sub'            => $this->input->post('fungsi'), 
             );
 
             if($this->Ded_m->post_data_sub_organisasi($data)){
@@ -289,8 +289,8 @@ class AdminC extends CI_Controller
             $data = array(
                 'id_organisasi'         => $this->input->post('id_organisasi'), 
                 'nama_suborganisasi'    => $this->input->post('nama_suborganisasi'), 
-                'tugas'                 => $this->input->post('tugas'), 
-                'fungsi'                => $this->input->post('fungsi'), 
+                'tugas_sub'                 => $this->input->post('tugas'), 
+                'fungsi_sub'                => $this->input->post('fungsi'), 
             );
             $id_suborganisasi = $this->input->post('id_suborganisasi');
 
@@ -393,7 +393,7 @@ class AdminC extends CI_Controller
     public function parameter($id_objek_data){
         $data['obyek_data']     = $this->Ded_m->get_all_obyek_data($id_objek_data)->result();
 
-        $id_suborganisasi       = $this->Ded_m->get_all_obyek_data($id_objek_data)->result()[0]->id_objek_data;
+        $id_suborganisasi       = $this->Ded_m->get_all_obyek_data($id_objek_data)->result()[0]->id_suborganisasi;
         $data['sub_organisasi'] = $this->Ded_m->get_all_suborganisasi_by_id($id_suborganisasi)->result();
 
         $id_organisasi          = $this->Ded_m->get_all_suborganisasi_by_id($id_suborganisasi)->result()[0]->id_organisasi;
@@ -626,6 +626,29 @@ class AdminC extends CI_Controller
             redirect_back(); 
         }else{
             $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+            redirect_back(); 
+        }
+    }
+
+    public function insert_data_kosong($id_organisasi){
+        $data = array('id_organisasi' => $id_organisasi);
+        if($insert_id = $this->Ded_m->post_data_sub_organisasi($data)){
+            $data_2 = array('id_suborganisasi' => $insert_id);
+            if($insert_id_2 = $this->Ded_m->post_data_objek_data($data_2)){
+                $data_3 = array('id_objek_data' => $insert_id_2);
+                if($insert_id_3 = $this->Ded_m->post_data_parameter($data_3)){
+                    $this->session->set_flashdata('sukses','Berhasil');
+                    redirect_back();
+                }else{
+                    $this->session->set_flashdata('error','Tidak berhasil');
+                    redirect_back(); 
+                }
+            }else{
+                $this->session->set_flashdata('error','Tidak berhasil');
+                redirect_back(); 
+            }
+        }else{
+            $this->session->set_flashdata('error','Tidak berhasil');
             redirect_back(); 
         }
     }

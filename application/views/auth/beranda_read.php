@@ -31,52 +31,99 @@
                                 <th class="text-center">Fungsi</th>
                                 <th class="text-center">Tugas</th>
                                 <th class="text-center">Objek Data</th>
-                                <!-- <th class="text-center">Tabel Data</th> -->
+                                <th class="text-center">Nama Parameter</th>
                                 <th class="text-center">Tipe</th>
                                 <th class="text-center">Panjang</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            print_r($all);
                             $i = 0;
-                            foreach($all as $a){
+                            for($m=0; $m < (sizeof($all)); $m++){
+                                $k=0;
                                 $i++;
                                 ?>
                                 <tr>
-                                    <td class="text-center">
+                                    <!-- Nomor -->
+                                    <?php
+                                    $rowspan_o = $Beranda_model->get_all_data($all[$m]['id_skpa'])->num_rows();
+                                    if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
+                                        echo '<td rowspan="'.$rowspan_o.'" class="text-center">'.$i.'</td>';
+                                    }else{
+                                        echo '';
+                                    }
+                                    ?>
+
+                                    <!-- nama organisasi -->
+                                    <?php
+                                    if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
+                                        echo '<td rowspan="'.$rowspan_o.'" class="text-left">'.$all[$m]['nama_organisasi'].'</td>';
+                                    }else{
+                                        echo "";
+                                    }
+                                    ?>
+
+                                    <!-- nama suborganisasi -->
+                                    <?php
+                                    $rowspan_s = $Beranda_model->get_all_data_org($all[$m]['id_organisasi'])->num_rows();
+                                    if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
+                                        echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
+                                    }else{
+                                        echo "";
+                                    }
+                                    ?>
+
+                                    <!-- fungsi suborganisasi -->
+                                    <?php
+                                    if($all[$m]['fungsi_sub'] != $all[$m-1]['fungsi_sub']){
+                                        echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
+                                    }else{
+                                        echo "";
+                                    }
+                                    ?>
+
+                                    <!-- tugas suborganisasi -->
+                                    <?php
+                                    if($all[$m]['tugas_sub'] != $all[$m-1]['tugas_sub']){
+                                        echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
+                                    }else{
+                                        echo "";
+                                    }
+                                    ?>
+
+                                    <!-- nama parameter -->
+                                    <?php
+                                    $rowspan_obj = $Beranda_model->get_all_data_objek($all[$m]['id_objek_data'])->num_rows();
+                                    if($all[$m]['objek_data'] != $all[$m-1]['objek_data']){
+                                        echo ' <td rowspan="'.$rowspan_obj.'" class="text-left">'.$all[$m]['objek_data'].'</td>';
+                                    }else{
+                                        echo "";
+                                    }
+                                    ?>
+
+                                    <td class="text-left">
                                         <?php
-                                        echo $i;
+                                        echo $all[$m]['nama_parameter'];
                                         ?>
                                     </td>
-                                    
                                     <td class="text-left">
-                                        <?php echo $a->nama_organisasi;?>
-                                    </td>
-                                    <td class="text-left">
-                                        <?php echo $a->nama_suborganisasi;?>
-                                    </td>
-                                    <td class="text-left">
-                                        <?php echo $a->fungsi;?>
-                                    </td>
-                                    <td class="text-left">
-                                        <?php echo $a->tugas;?>
-                                    </td>
-                                    <td class="text-left">
-                                        <?php echo $a->objek_data;?>
-                                    </td>
-                                    <td class="text-left">
-                                        <?php echo $a->tipe_data;?>
+                                        <?php
+                                        echo $all[$m]['tipe_data'];
+                                        ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $a->panjang_data;?>
+                                        <?php
+                                        echo $all[$m]['panjang_data'];
+                                        ?>
                                     </td>
                                 </tr>
                                 <?php
+                                $k++;
                             }
                             ?>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
