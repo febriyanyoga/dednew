@@ -46,7 +46,8 @@
                                 <tr>
                                     <!-- Nomor -->
                                     <?php
-                                    $rowspan_o = $Beranda_model->get_all_data($all[$m]['id_skpa'])->num_rows();
+                                    $rowspan_o = $Beranda_model->get_all_data_org($all[$m]['id_organisasi'])->num_rows();
+
                                     if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
                                         echo '<td rowspan="'.$rowspan_o.'" class="text-center">'.$i.'</td>';
                                     }else{
@@ -67,6 +68,7 @@
                                     <?php
                                     $rowspan_s = $Beranda_model->get_all_data_org($all[$m]['id_organisasi'])->num_rows();
                                     if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
+
                                         echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
                                     }else{
                                         echo "";
@@ -76,7 +78,11 @@
                                     <!-- fungsi suborganisasi -->
                                     <?php
                                     if($all[$m]['fungsi_sub'] != $all[$m-1]['fungsi_sub']){
-                                        echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
+                                        if($all[$m]['fungsi_sub'] == ""){
+                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi'].'</td>';
+                                        }else{
+                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
+                                        }
                                     }else{
                                         echo "";
                                     }
@@ -85,7 +91,11 @@
                                     <!-- tugas suborganisasi -->
                                     <?php
                                     if($all[$m]['tugas_sub'] != $all[$m-1]['tugas_sub']){
-                                        echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
+                                        if($all[$m]['tugas_sub'] == ""){
+                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas'].'</td>';
+                                        }else{
+                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
+                                        }
                                     }else{
                                         echo "";
                                     }
