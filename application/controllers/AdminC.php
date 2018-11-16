@@ -32,6 +32,7 @@ class AdminC extends CI_Controller
 
     public function read($id_skpa){
         $data['Beranda_model'] = $this->Beranda_model;
+        $data['org_by_skpa'] = $this->Beranda_model->get_org_by_id_skpa($id_skpa)->result();
         $data['skpa'] = $this->Ded_m->get_all_ded_by_id($id_skpa)->result()[0];
         $data['ded'] = $this->Ded_m->get_all_ded($id_skpa)->result();
         $data['all'] = $this->Beranda_model->get_all_data($id_skpa)->result_array();

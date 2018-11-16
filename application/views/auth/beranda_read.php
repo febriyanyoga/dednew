@@ -22,14 +22,14 @@
                 </div>
                 <hr>
                 <div class="table-responsive">
-                    <table id="file_export" class="table table-striped table-bordered display" data-options='{ "paging": false; "searching":false}'>
+                    <table id="lele" class="table table-bordered display" data-options='{ "paging": false; "searching":false}'>
                         <thead>
                             <tr>
                                 <th class="text-center" max-width="20px">No</th>
                                 <th class="text-center">Organisasi</th>
                                 <th class="text-center">Sub Organisasi</th>
-                                <th class="text-center">Fungsi</th>
                                 <th class="text-center">Tugas</th>
+                                <th class="text-center">Fungsi</th>
                                 <th class="text-center">Objek Data</th>
                                 <th class="text-center">Nama Parameter</th>
                                 <th class="text-center">Tipe</th>
@@ -38,91 +38,97 @@
                         </thead>
                         <tbody>
                             <?php
-                            $i = 0;
+                            $suborg = $Beranda_model->get_all_suborg()->result();
+                            $data_suborg = array();
+                            foreach ($suborg as $s) {
+                                array_push($data_suborg, $s->id_organisasi);
+                            }
+                            // print_r($data_suborg);
+                            $data_org_no = array();
+                            foreach ($org_by_skpa as $orb) {
+                                if(!in_array($orb->id_organisasi, $data_suborg)){
+                                    array_push($data_org_no, $orb->id_organisasi);
+                                }
+                            }
+                            // print_r($data_org_no);
+                            $p=0;
+                            foreach ($data_org_no as $k=>$key) {
+                                $data = $Beranda_model->get_org($data_org_no[$k])->row();
+                                ?>
+                                <tr>
+                                    <td><?php echo $p+1;?></td>
+                                    <td><?php echo $data->nama_organisasi;?></td>
+                                    <?php echo '<td></td>';?>
+                                    <td><?php echo $data->tugas;?></td>
+                                    <td><?php echo $data->fungsi;?></td>
+                                    <?php echo '<td ></td>';?>
+                                    <?php echo '<td ></td>';?>
+                                    <?php echo '<td ></td>';?>
+                                    <?php echo '<td ></td>';?>
+                                </tr>
+                                <?php
+                                $p++;
+                            }
+                            ?>
+                            <?php
+                            $i = $p+1;
                             for($m=0; $m < (sizeof($all)); $m++){
                                 $k=0;
-                                $i++;
+                                
                                 ?>
                                 <tr>
                                     <!-- Nomor -->
                                     <?php
                                     $rowspan_o = $Beranda_model->get_all_data_org($all[$m]['id_organisasi'])->num_rows();
                                     if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
-                                        echo '<td rowspan="'.$rowspan_o.'" class="text-center">'.$i.'</td>';
+                                        echo '<td class="text-center">'.$i.'</td>';
                                     }else{
-                                        echo '';
+                                        echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt; ">'.$i.'</td>';
                                     }
                                     ?>
 
                                     <!-- nama organisasi -->
                                     <?php
-                                    if($all[$m]['nama_suborganisasi'] != ""){
-                                        if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
-                                            echo '<td rowspan="'.$rowspan_o.'" class="text-left">'.$all[$m]['nama_organisasi'].'</td>';
-                                        }else{
-                                            echo "";
-                                        }
+                                    if($all[$m]['nama_organisasi'] != $all[$m-1]['nama_organisasi']){
+                                        echo '<td class="text-left">'.$all[$m]['nama_organisasi'].'</td>';
+                                        $i++;
                                     }else{
-                                        echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_organisasi'].' </td>';
+                                        echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt;">'.$all[$m] ['nama_organisasi'].'</td>';
                                     }
                                     ?>
 
                                     <!-- nama suborganisasi -->
                                     <?php
-                                    $rowspan_s = $Beranda_model->get_all_data_org($all[$m]['id_organisasi'])->num_rows();
-                                    if($m != 0){
-                                        if($all[$m]['nama_suborganisasi'] != ""){
-                                            if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
-                                                echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
-                                            }else{
-                                                echo "";
-                                            }
-                                        }else{
-                                            echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
-                                        }
+                                    $rowspan_s = $Beranda_model->get_all_data_obj_by_id_sub($all[$m]['id_suborganisasi'])->num_rows();
+                                    if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
+                                        echo '<td class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
                                     }else{
-                                        echo '<td rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['nama_suborganisasi'].' </td>';
+                                        echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt;">'.$all[$m] ['nama_suborganisasi'].'</td>';
                                     }
                                     ?>
 
-                                    <!-- fungsi suborganisasi -->
-                                    <?php
-                                    if($m != 0){
-                                        if($all[$m]['fungsi_sub'] != $all[$m-1]['fungsi_sub']){
-                                            if($all[$m]['fungsi_sub'] == ""){
-                                                echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi'].'</td>';
-                                            }else{
-                                                echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
-                                            }
-                                        }else{
-                                            echo "";
-                                        }
-                                    }else{
-                                        if($all[$m]['fungsi_sub'] == ""){
-                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi'].'</td>';
-                                        }else{
-                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
-                                        }
-                                    }
-                                    ?>
 
                                     <!-- tugas suborganisasi -->
                                     <?php
-                                    if($m != 0){
-                                        if($all[$m]['tugas_sub'] != $all[$m-1]['tugas_sub']){
-                                            if($all[$m]['tugas_sub'] == ""){
-                                                echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas'].'</td>';
-                                            }else{
-                                                echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
-                                            }
-                                        }else{
-                                            echo "";
-                                        }
+                                    $rowspan_s = $Beranda_model->get_all_data_obj_by_id_sub($all[$m]['id_suborganisasi'])->num_rows();
+                                    if($all[$m]['tugas_sub'] != $all[$m-1]['tugas_sub']){
+                                        echo '<td style="min-width:300px;" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
                                     }else{
-                                        if($all[$m]['tugas_sub'] == ""){
-                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas'].'</td>';
+                                        echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt;">'.$all[$m] ['tugas_sub'].'</td>';
+                                    }
+
+                                    ?>
+                                    <!-- fungsi suborganisasi -->
+                                    <?php
+                                    $rowspan_s = $Beranda_model->get_all_data_obj_by_id_sub($all[$m]['id_suborganisasi'])->num_rows();
+                                    if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
+                                        echo '<td class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
+                                    }else{
+                                        if($all[$m]['fungsi_sub'] != $all[$m-1]['fungsi_sub']){
+                                            echo '<td class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
+                                            // echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['fungsi_sub'].'</td>';
                                         }else{
-                                            echo '<td style="min-width:300px;" rowspan="'.$rowspan_s.'" class="text-left">'.$all[$m]['tugas_sub'].'</td>';
+                                            echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt;">'.$all[$m] ['fungsi_sub'].'</td>';
                                         }
                                     }
                                     ?>
@@ -130,14 +136,14 @@
                                     <!-- nama parameter -->
                                     <?php
                                     $rowspan_obj = $Beranda_model->get_all_data_objek($all[$m]['id_objek_data'])->num_rows();
-                                    if($m != 0){
-                                        if($all[$m]['objek_data'] != $all[$m-1]['objek_data']){
-                                            echo ' <td rowspan="'.$rowspan_obj.'" class="text-left">'.$all[$m]['objek_data'].'</td>';
-                                        }else{
-                                            echo "";
-                                        }
+                                    if($all[$m]['nama_suborganisasi'] != $all[$m-1]['nama_suborganisasi']){
+                                        echo '<td class="text-left">'.$all[$m]['objek_data'].'</td>';
                                     }else{
-                                        echo ' <td rowspan="'.$rowspan_obj.'" class="text-left">'.$all[$m]['objek_data'].'</td>';
+                                        if($all[$m]['objek_data'] != $all[$m-1]['objek_data']){
+                                            echo '<td class="text-left">'.$all[$m]['objek_data'].'</td>';
+                                        }else{
+                                            echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent; text-color : transparent; color : transparent; font-size: 1pt;">'.$all[$m] ['objek_data'].'</td>';
+                                        }
                                     }
                                     ?>
 
@@ -146,7 +152,7 @@
                                         if($all[$m]['objek_data'] != ""){
                                             echo $all[$m]['nama_parameter'];
                                         }else{
-                                            echo "";
+                                            echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent;"></td>';
                                         }
                                         ?>
                                     </td>
@@ -155,7 +161,7 @@
                                         if($all[$m]['objek_data'] != ""){
                                             echo $all[$m]['tipe_data'];
                                         }else{
-                                            echo "";
+                                            echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent;"></td>';
                                         }
                                         ?>
                                     </td>
@@ -164,8 +170,9 @@
                                         if($all[$m]['objek_data'] != ""){
                                             echo $all[$m]['panjang_data'];
                                         }else{
-                                            echo "";
+                                            echo '<td style="border-top : 0px solid transparent; border-bottom : 0px solid transparent;"></td>';
                                         }
+                                        
                                         ?>
                                     </td>
                                 </tr>
@@ -173,6 +180,8 @@
                                 $k++;
                             }
                             ?>
+
+                            
                         </tbody>
                     </table>
 
@@ -181,14 +190,6 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#file_export').DataTable({
-            "pageLength": 50
-        });
-    });
-</script>
 <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>

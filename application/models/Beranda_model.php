@@ -87,15 +87,35 @@ class Beranda_model extends CI_Model
         $this->db->join('tbl_objek_data D','P.id_objek_data = D.id_objek_data');
         $this->db->join('tbl_suborganisasi S','D.id_suborganisasi = S.id_suborganisasi');
         $this->db->join('tbl_organisasi O','S.id_organisasi = O.id_organisasi');
-
         $this->db->where('O.id_organisasi', $id_organisasi);
+        return $this->db->get();
+    }
+
+    function get_all_data_obj_by_id_sub($id_suborganisasi){
+        $this->db->select('*');
+        $this->db->from('tbl_parameter P');
+        $this->db->join('tbl_objek_data D','P.id_objek_data = D.id_objek_data');
+        $this->db->join('tbl_suborganisasi S','D.id_suborganisasi = S.id_suborganisasi');
+        $this->db->where('S.id_suborganisasi', $id_suborganisasi);
+        return $this->db->get();
+    }
+
+    public function get_org($id_organisasi){
+        $this->db->where('id_organisasi', $id_organisasi);
+        return $this->db->get('tbl_organisasi');
+    }
+
+    public function get_org_by_id_skpa($id_skpa){
+        $this->db->select('*');
+        $this->db->from('tbl_organisasi');
+        $this->db->where('id_skpa', $id_skpa);
         return $this->db->get();
     }
 
     function get_all_data_objek($id_objek_data){
         $this->db->select('*');
         $this->db->from('tbl_parameter P');
-        $this->db->where('p.id_objek_data', $id_objek_data);
+        $this->db->where('P.id_objek_data', $id_objek_data);
         return $this->db->get();
     }
 
